@@ -1,8 +1,12 @@
+
+# USED IN ORACLE DATABASE
 set serveroutput on
 variable n number
 exec :n := dbms_utility.get_time;
-
 --SELECT /*+ PARALLEL(4) */ count(*) 
+
+
+# COMMON FOR ALL DATABASE
 SELECT count(*) 
 FROM p02_quesiti 
 LEFT OUTER JOIN p02_tipi_formato ON (p02_quesiti.tipo_formato_cod = p02_tipi_formato.tipo_formato_cod)
@@ -59,5 +63,6 @@ LEFT OUTER JOIN p09_ud_pdsord_doc q35_ud_tipo_copertura ON ((q35_dati_comp.aa_of
     WHERE ((p02_quesiti.questionario_id = 35) 
         AND ((q35_dati_comp.aa_off_ad_id_val = '2016') 
         AND (Q35_DATI_COMP.DATAORA_COMP < to_date('31/12/2016','dd/mm/yyyy'))));
-		
+
+# USED IN ORACLE DATABASE		
 exec dbms_output.put_line( (dbms_utility.get_time-:n)/100) || ' seconds....' );
