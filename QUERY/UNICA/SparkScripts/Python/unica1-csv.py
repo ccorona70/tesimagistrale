@@ -12,11 +12,11 @@ conf = SparkConf().setMaster("local").setAppName("Query1").set("spark.executor.c
 
 
 #CLUSTER EXCUTION WITH MORE SETTINGS
-#conf = SparkConf().setMaster("spark://192.167.155.71:7077").setAppName("Query1").set("spark.executor.cores", "2").set("spark.executor.instances", "4").set("spark.executor.memory","2G").set("spark.driver.memory","4G")
+#conf = SparkConf().setMaster("local").setAppName("Query1-Test1").set("spark.executor.cores", "4").set("spark.executor.memory","6G").set("spark.driver.memory","12G").set("spark.driver-cores","4").set("spark.num_executors","16").set("spark.sql.codegen","true").set("spark.sql.inMemoryColumnarStorage.com","true").set("spark.sql.inMemoryColumnarStorageBatch","10000").set("spark.sql.parquet.compression.codec","snappy").set("spark.executor.extraJavaOptions","-XX:MaxPermSize=1G").set("spark.driver-java-options","-XX:MaxPermSize=1G")
 
 
-# LOCAL EXECUTION WITH MORE SPARK OPTION
-#conf = SparkConf().setMaster("local").setAppName("Query1").set("spark.executor.cores", "4").set("spark.executor.memory","4G").set("spark.driver.memory","8G").set("spark.driver-cores","4").set("spark.num_executors","8").set("spark.sql.codegen","true").set("spark.sql.inMemoryColumnarStorage.com","true").set("spark.sql.inMemoryColumnarStorageBatch","10000").set("spark.sql.parquet.compression.codec","snappy").set("spark.executor.extraJavaOptions","-XX:MaxPermSize=1G").set("spark.driver-java-options","-XX:MaxPermSize=1G")
+# LOCAL EXECUTION
+#conf = SparkConf().setMaster("local").setAppName("Query1-Test1").set("spark.executor.cores", "4").set("spark.executor.memory","4G").set("spark.driver.memory","8G").set("spark.driver-cores","4").set("spark.num_executors","8").set("spark.sql.codegen","true").set("spark.sql.inMemoryColumnarStorage.com","true").set("spark.sql.inMemoryColumnarStorageBatch","10000").set("spark.sql.parquet.compression.codec","snappy").set("spark.executor.extraJavaOptions","-XX:MaxPermSize=1G").set("spark.driver-java-options","-XX:MaxPermSize=1G")
 
 
 sc = SparkContext(conf = conf)
@@ -456,7 +456,7 @@ tab21.registerTempTable("Q35_INVIO_SEGNALAZIONE")
 # IMPORT TABLE Q35_NUM_QUEST_CDS_DOC_UD  ------- OK ---------
 file22 = sc.textFile('hdfs://master:9000/carlo.corona/Q35_NUM_QUEST_CDS_DOC_UD.csv')
 split22 = file22.map(lambda l: l.split(";"))
-schema22 = split22.map(lambda p: Row(AA_OFF_AD_ID_VAL=p[0],AD_ID_VAL=p[1],AD_VAL_COD=p[2],AD_VAL_DENOMINZAIONE=p[3],CDS_AD_ID_VAL=p[4],CDS_AD_VAL_COD=p[5],CDS_AD_VAL_DENOMINAZIONE=p[6],CDS_AD_VAL_TIPO_CORSO=p[7],CDS_AD_VAL_TIPO_CORSO_DES=p[8],CDS_AD_VAL_DURATA_ANNI=p[9],CDS_AD_VAL_NORMATIVA=p[10],FAC_AD_VAL_COD=p[11],FAC_AD_VAL_DENOMINAZIONE=p[12],DOC_AD_ID_VAL=p[13],DOC_AD_VAL_NOMINATIVO=p[14],DOC_AD_VAL_MATRICOLA=p[15],DOC_AD_VAL_E_MAIL=p[16],EVENTO_COMP=p[17],STU_FREQ_FLG_COMP=p[18],STU_NO_AUT_FLG_COMP=p[19],UD_ID_VAL=p[20],UD_VAL_COD=p[21],UD_VAL_DENOMINAZIONE=p[22],NUM_QUEST_COMP=p[23]))
+schema22 = split22.map(lambda p: Row(AA_OFF_AD_ID_VAL=p[0],AD_ID_VAL=p[1],AD_VAL_COD=p[2],AD_VAL_DENOMINZAIONE=p[3],CDS_AD_ID_VAL=p[4],CDS_AD_VAL_COD=p[5],CDS_AD_VAL_DENOMINAZIONE=p[6],CDS_AD_VAL_TIPO_CORSO=p[7],CDS_AD_VAL_TIPO_CORSO_DES=p[8],CDS_AD_VAL_DURATA_ANNI=p[9],CDS_AD_VAL_NORMATIVA=p[10],FAC_AD_VAL_COD=p[11],FAC_AD_VAL_DENOMINAZIONE=p[12],DOC_AD_ID_VAL=p[13],EVENTO_COMP=p[14],STU_FREQ_FLG_COMP=p[15],STU_NO_AUT_FLG_COMP=p[16],UD_ID_VAL=p[17],UD_VAL_COD=p[18],UD_VAL_DENOMINAZIONE=p[19],NUM_QUEST_COMP=p[20]))
 tab22 = sqlContext.createDataFrame(schema22)
 tab22 = tab22.withColumn('AA_OFF_AD_ID_VAL', tab22['AA_OFF_AD_ID_VAL'].cast(IntegerType()))
 tab22 = tab22.withColumn('AD_ID_VAL', tab22['AD_ID_VAL'].cast(IntegerType()))
