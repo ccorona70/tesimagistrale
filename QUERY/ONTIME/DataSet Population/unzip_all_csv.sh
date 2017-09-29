@@ -1,0 +1,1 @@
+find . -name "*.zip" -exec unzip -o {} \;
