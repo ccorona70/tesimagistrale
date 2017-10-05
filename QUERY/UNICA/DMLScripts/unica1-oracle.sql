@@ -1,8 +1,7 @@
---set serveroutput on
---variable n number
---exec :n := dbms_utility.get_time;
+set serveroutput on
+variable n number
+exec :n := dbms_utility.get_time;
 
---SELECT /*+ PARALLEL(4) */ count(*) 
 SELECT count(*) 
 FROM p02_quesiti 
 LEFT OUTER JOIN p02_tipi_formato ON (p02_quesiti.tipo_formato_cod = p02_tipi_formato.tipo_formato_cod)
@@ -56,8 +55,9 @@ LEFT OUTER JOIN p09_ud_pdsord_doc q35_ud_tipo_copertura ON ((q35_dati_comp.aa_of
     AND (q35_dati_comp.doc_ad_id_val = q35_ud_tipo_copertura.docente_id)
     AND (q35_dati_comp.pds_ad_id_val = q35_ud_tipo_copertura.pds_id)
     AND (q35_dati_comp.ud_id_val = q35_ud_tipo_copertura.ud_id)) 
-    WHERE ((p02_quesiti.questionario_id = 35) 
-        AND ((q35_dati_comp.aa_off_ad_id_val = '2016') 
-        AND (Q35_DATI_COMP.DATAORA_COMP < to_date('31/12/2016','dd/mm/yyyy'))));
+    WHERE p02_quesiti.questionario_id = 35
+        AND (q35_dati_comp.aa_off_ad_id_val NOT IN ('2016') 
+        AND Q35_DATI_COMP.DATAORA_COMP > to_date('31/12/2016','dd/mm/yyyy')
+		AND Q35_DATI_COMP.DATAORA_COMP < to_date('01/01/2016','dd/mm/yyyy'));
 		
---exec dbms_output.put_line(( (dbms_utility.get_time-:n)/100) || ' seconds....' );
+exec dbms_output.put_line(( (dbms_utility.get_time-:n)/100) || ' seconds....' );

@@ -1,0 +1,1 @@
+CREATE INDEX index1 ON ontime( DayOfWeek, OriginState, DestState, Carrier, Year, ArrDelayMinutes );

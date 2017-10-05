@@ -1,6 +1,4 @@
-# \timing on
-
-SELECT COUNT(*) 
+select q35_dati_comp.aa_off_ad_id_val,count(*) 
 FROM esse3.P02_QUESITI 
 LEFT OUTER JOIN esse3.P02_TIPI_FORMATO ON (P02_QUESITI.TIPO_FORMATO_COD = P02_TIPI_FORMATO.TIPO_FORMATO_COD)
 LEFT OUTER JOIN esse3.ELEMENTI ELEMENTO_P02_QUESITI ON (P02_QUESITI.ELEM_COD = ELEMENTO_P02_QUESITI.ELEM_COD)
@@ -53,9 +51,12 @@ LEFT OUTER JOIN esse3.P09_UD_PDSORD_DOC Q35_UD_TIPO_COPERTURA ON ((Q35_DATI_COMP
     AND (Q35_DATI_COMP.DOC_AD_ID_VAL = Q35_UD_TIPO_COPERTURA.DOCENTE_ID)
     AND (Q35_DATI_COMP.PDS_AD_ID_VAL = Q35_UD_TIPO_COPERTURA.PDS_ID)
     AND (Q35_DATI_COMP.UD_ID_VAL = Q35_UD_TIPO_COPERTURA.UD_ID)) 
-    WHERE P02_QUESITI.QUESTIONARIO_ID = 35
-        AND (Q35_DATI_COMP.AA_OFF_AD_ID_VAL NOT IN ('2016') 
+    where p02_quesiti.questionario_id = 35 
+        and (q35_dati_comp.aa_off_ad_id_val not in ('2016') 
         and q35_dati_comp.dataora_comp > to_date('31/12/2016','dd/mm/yyyy') or 
-        q35_dati_comp.dataora_comp < to_date('01/01/2016','dd/mm/yyyy'));
+        q35_dati_comp.dataora_comp < to_date('01/01/2016','dd/mm/yyyy'))
+        group by q35_dati_comp.aa_off_ad_id_val
+		HAVING COUNT(*)>200000
+        order by q35_dati_comp.aa_off_ad_id_val;
 		
 

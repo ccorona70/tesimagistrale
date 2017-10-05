@@ -1,0 +1,1 @@
+select dayofweek, count(*) from ontime group by dayofweek;
