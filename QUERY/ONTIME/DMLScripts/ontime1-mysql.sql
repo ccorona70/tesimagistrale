@@ -8,4 +8,4 @@ and OriginState not in ('AK', 'HI', 'PR', 'VI')
 and DestState not in ('AK', 'HI', 'PR', 'VI') 
 GROUP by carrier HAVING cnt > 100000 and max_year > 2010 
 ORDER by rate DESC, cnt desc 
-LIMIT 10
+LIMIT 10;

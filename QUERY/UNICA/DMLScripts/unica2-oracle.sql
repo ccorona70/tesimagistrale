@@ -57,8 +57,8 @@ left outer join p09_ud_pdsord_doc q35_ud_tipo_copertura on ((q35_dati_comp.aa_of
     and (q35_dati_comp.ud_id_val = q35_ud_tipo_copertura.ud_id)) 
     where p02_quesiti.questionario_id = 35
         and (q35_dati_comp.aa_off_ad_id_val NOT IN ('2016') 
-        and q35_dati_comp.dataora_comp < to_date('01/01/2016','dd/mm/yyyy') or
-        q35_dati_comp.dataora_comp > to_date('31/12/2016','dd/mm/yyyy')) or
+        and q35_dati_comp.dataora_comp > to_date(’31/12/2016','dd/mm/yyyy') or
+        q35_dati_comp.dataora_comp < to_date(’01/01/2016','dd/mm/yyyy')) 
         group by q35_dati_comp.aa_off_ad_id_val
 		HAVING COUNT(*)>200000
         order by q35_dati_comp.aa_off_ad_id_val;

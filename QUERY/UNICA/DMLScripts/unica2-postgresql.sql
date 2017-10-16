@@ -59,4 +59,3 @@ LEFT OUTER JOIN esse3.P09_UD_PDSORD_DOC Q35_UD_TIPO_COPERTURA ON ((Q35_DATI_COMP
 		HAVING COUNT(*)>200000
         order by q35_dati_comp.aa_off_ad_id_val;
 		
-

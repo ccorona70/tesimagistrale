@@ -58,6 +58,6 @@ LEFT OUTER JOIN p09_ud_pdsord_doc q35_ud_tipo_copertura ON ((q35_dati_comp.aa_of
     WHERE p02_quesiti.questionario_id = 35
         AND (q35_dati_comp.aa_off_ad_id_val NOT IN ('2016') 
         AND Q35_DATI_COMP.DATAORA_COMP > to_date('31/12/2016','dd/mm/yyyy')
-		AND Q35_DATI_COMP.DATAORA_COMP < to_date('01/01/2016','dd/mm/yyyy'));
+		OR Q35_DATI_COMP.DATAORA_COMP < to_date('01/01/2016','dd/mm/yyyy'));
 		
 exec dbms_output.put_line(( (dbms_utility.get_time-:n)/100) || ' seconds....' );
